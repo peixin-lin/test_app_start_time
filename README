@@ -1,0 +1,21 @@
+1. 准备数据集
+    1) 自动录制： python3 app_start_time.py r [存放图片的文件夹名称] [应用包名]
+          例如： python3 app_start_time.py r wechat com.tecent.mm
+    2) 手动录制： 
+        a. 执行"adb shell screenrecord --verbose --time-limit 10 /sdcard/demo.mp4"
+        b. 创建要保存图片的文件夹，进入到该文件夹，执行"adb pull sdcard/demo.mp4"
+	c. 执行"ffmpeg -i demo.mp4 -r 30 -t 100 %d.jpeg"，删掉视频文件（*记得）
+
+2. 训练
+    1) 执行1.准备数据集的操作
+    2) 在存文图片的文件夹目录下，创建四个文件夹：
+	"desktop" - 表示手机桌面的页面
+	"activated" - 表示点了应用，图标颜色改变的页面
+	"duration" - 表示加载页面
+	"frontpage" - 表示完整的应用首页页面
+    3) 人工将相应类型的图片移入对应的文件夹
+    4) python3 app_start_time.py t [存放图片的文件夹名称]
+
+3. 计算时间
+    1) 执行1.准备数据集的操作
+    2) python3 app_start_time.py c [存放图片的文件夹名称]
